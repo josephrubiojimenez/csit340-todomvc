@@ -5,6 +5,10 @@ function Todos() {
     const [text, setText] = useState('')
     const [todos, setTodos] = useState([])
     const [filter, setFilter] = useState('All')
+    const selectedFilterClass =
+      'cursor-pointer rounded-[3px] border border-[#b83f45]/20 px-[7px] py-[3px]'
+    const unselectedFilterClass =
+      'cursor-pointer rounded-[3px] border border-transparent px-[7px] py-[3px] hover:border-[#b83f45]/10'
     const activeCount = todos.filter((todo) => !todo.completed).length
     const completedCount = todos.filter((todo) => todo.completed).length
     const allCompleted = todos.length > 0 && activeCount === 0
@@ -130,11 +134,8 @@ function Todos() {
                   <button
                     type="button"
                     onClick={() => setFilter('All')}
-                    className={
-                      filter === 'All'
-                        ? 'cursor-pointer rounded-[3px] border border-[#b83f45]/20 px-[7px] py-[3px]'
-                        : 'cursor-pointer rounded-[3px] border border-transparent px-[7px] py-[3px] hover:border-[#b83f45]/10'
-                    }
+                    aria-pressed={filter === 'All'}
+                    className={filter === 'All' ? selectedFilterClass : unselectedFilterClass}
                   >
                     All
                   </button>
@@ -143,11 +144,8 @@ function Todos() {
                   <button
                     type="button"
                     onClick={() => setFilter('Active')}
-                    className={
-                      filter === 'Active'
-                        ? 'cursor-pointer rounded-[3px] border border-[#b83f45]/20 px-[7px] py-[3px]'
-                        : 'cursor-pointer rounded-[3px] border border-transparent px-[7px] py-[3px] hover:border-[#b83f45]/10'
-                    }
+                    aria-pressed={filter === 'Active'}
+                    className={filter === 'Active' ? selectedFilterClass : unselectedFilterClass}
                   >
                     Active
                   </button>
@@ -156,10 +154,11 @@ function Todos() {
                   <button
                     type="button"
                     onClick={() => setFilter('Completed')}
+                    aria-pressed={filter === 'Completed'}
                     className={
                       filter === 'Completed'
-                        ? 'cursor-pointer rounded-[3px] border border-[#b83f45]/20 px-[7px] py-[3px]'
-                        : 'cursor-pointer rounded-[3px] border border-transparent px-[7px] py-[3px] hover:border-[#b83f45]/10'
+                        ? selectedFilterClass
+                        : unselectedFilterClass
                     }
                   >
                     Completed
