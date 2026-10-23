@@ -10,3 +10,5 @@ function Todos() {
     </section>
   )
 }
+
+export default Todos
