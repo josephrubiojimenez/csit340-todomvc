@@ -6,6 +6,7 @@ function Todos() {
     const [todos, setTodos] = useState([])
     const [filter, setFilter] = useState('All')
     const activeCount = todos.filter((todo) => !todo.completed).length
+    const completedCount = todos.filter((todo) => todo.completed).length
     const allCompleted = todos.length > 0 && activeCount === 0
     const visibleTodos = todos.filter((todo) => {
       if (filter === 'Active') return !todo.completed
@@ -164,7 +165,7 @@ function Todos() {
                 </li>
               </ul>
 
-              {todos.some((todo) => todo.completed) && (
+              {completedCount > 0 && (
                 <button
                   type="button"
                   onClick={handleClearCompleted}
