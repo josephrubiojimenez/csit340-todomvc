@@ -38,9 +38,13 @@ function Todos() {
   }
 
   function handleToggleAll() {
-    setTodos((currentTodos) =>
-      currentTodos.map((todo) => ({ ...todo, completed: !allCompleted }))
-    )
+    setTodos((currentTodos) => {
+      const shouldCompleteAll = !currentTodos.every((todo) => todo.completed)
+      return currentTodos.map((todo) => ({
+        ...todo,
+        completed: shouldCompleteAll,
+      }))
+    })
   }
 
   function handleClearCompleted() {
@@ -77,9 +81,7 @@ function Todos() {
               />
               <label
                 htmlFor="toggle-all"
-                className={`absolute -top-[66px] left-0 flex h-[65px] w-[60px] cursor-pointer items-center justify-center text-[22px] ${
-                  allCompleted ? 'text-[#484848]' : 'text-[#949494]'
-                }`}
+                className="absolute -top-[66px] left-0 flex h-[65px] w-[60px] cursor-pointer items-center justify-center text-[22px] text-[#949494] peer-checked:text-[#484848]"
               >
                 <span className="rotate-90">❯</span>
               </label>
