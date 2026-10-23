@@ -3,10 +3,21 @@ import { useState } from 'react'
 
 function Todos() {
     const [text, setText] = useState('')
-    const [todos] = useState([
+    const [todos, setTodos] = useState([
         { id: 1, text: 'Learn the spread operator', completed: false },
         { id: 2, text: 'Set up Tailwind', completed: true },
     ])
+
+    function handleSubmit(e) {
+    e.preventDefault()
+    const trimmed = text.trim()
+    if (trimmed === '') {
+      return
+    }
+    const newTodo = { id: crypto.randomUUID(), text: trimmed, completed: false }
+    setTodos([...todos, newTodo])
+    setText('')
+  }
 
   return (
     <section className="mx-auto max-w-[550px]">
@@ -15,7 +26,7 @@ function Todos() {
       </h1>
 
       <div className="relative bg-white shadow-[0_2px_4px_0_rgba(0,0,0,0.2),0_25px_50px_0_rgba(0,0,0,0.1)]">
-        <form>
+        <form onSubmit={handleSubmit}>
           <input
             value={text}
             onChange={(e) => setText(e.target.value)}
